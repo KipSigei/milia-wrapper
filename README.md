@@ -46,6 +46,6 @@ export default function (_self, datasetID, fieldName, callback) {
     '"defualtField3",' +
     '"'}${fieldName}"]` };
 
-  wrappers.milia.set_host(<protocol>, <host<>);
-  wrappers.milia.get_form_data(<datasetID>, <queryParams>, <callback>);
+  wrappers.milia.set_host(protocol, host);
+  wrappers.milia.get_form_data(datasetID, queryParams, callback);
 ```
