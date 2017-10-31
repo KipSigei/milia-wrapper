@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Leiningen: com.keminglabs/c2:0.2.4-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/keminglabs/c2/0.2.4-SNAPSHOT/c2-0.2.4-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
