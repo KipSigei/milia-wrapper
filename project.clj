@@ -18,14 +18,15 @@
             [lein-cljfmt "0.5.6"]]
   :cljsbuild
   {:builds {:dev {:source-paths ["src/cljs"]
-                  :compiler {:output-to "../dist/assets/js/wrappers.js"
-                             :output-dir "../dist/assets/js/out"
-                             :asset-path "./assets/js/out"
+                  :compiler {:output-to "./dist/wrappers.js"
+                             :output-dir "./dist/out"
+                             :asset-path "./out"
                              :main "wrappers.milia"
                              :optimizations :none
                              :pretty-print true
                              :source-map true}}
             :prod {:source-paths ["src/cljs"]
-                   :compiler {:output-to "../dist/assets/js/wrappers.js"
+                   :compiler {:output-to "./dist/wrappers.js"
                               :optimizations :advanced
+                              :target :nodejs
                               :pretty-print false}}}})
