@@ -1,7 +1,7 @@
 
 # Milia-wrapper
 
-Javascript wrapper for  Ona API client library [Milia](https://github.com/onaio/milia#milia) for use in JS & NodeJS applications.
+Javascript wrapper for Ona API client library [Milia](https://github.com/onaio/milia#milia) for use in JS & NodeJS applications.
 
 ## Compiling
 
@@ -39,11 +39,11 @@ The output file is `./dist/milia-wrapper.js`
 var protocol = 'https';
 var host = 'api.ona.io';
 var datasetID = 101;
-const queryParams = { fields: `${'["defualtField1",' +
-                                                        '"defualtField2",'+'"'}${fieldName}"]`};
+var queryParams = { fields: `${'["defualtField1",' +
+                                 '"defualtField2",'+'"'}${fieldName}"]`};
 var callback = function(response) {
-                             console.log(response)
-                         }
+                 console.log(response)
+               }
 
  milia.wrapper.set_host(protocol, host);
  milia.wrapper.get_form_data(datasetID, queryParams, callback);
@@ -62,11 +62,11 @@ import * as milia from 'milia-wrapper';
 var protocol = 'https';
 var host = 'api.ona.io';
 var datasetID = 101;
-const queryParams = { fields: `${'["defualtField1",' +
-                                                        '"defualtField2",'+'"'}${fieldName}"]`};
+var queryParams = { fields: `${'["defualtField1",' +
+                                 '"defualtField2",'+'"'}${fieldName}"]`};
 var callback = function(response) {
-                             console.log(response)
-                         }
+                 console.log(response)
+               }
 
  milia.wrapper.set_host(protocol, host);
  milia.wrapper.get_form_data(datasetID, queryParams, callback);
