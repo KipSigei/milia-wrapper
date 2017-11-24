@@ -1,5 +1,5 @@
-(defproject wrappers "0.0.1-SNAPSHOT"
-  :description "Ona wrapper for milia"
+(defproject milia-wrapper "0.0.1-SNAPSHOT"
+  :description "Javascript wrapper for the Ona API client library (Milia)"
   :url "https://github.com/onaio/esir-dashboard/wrappers"
   :license {:name "Eclipse Public License - v 1.0"
             :url "http://www.eclipse.org/legal/epl-v10.html"
@@ -19,7 +19,7 @@
                   :compiler {:output-to "./dist/milia-wrapper.js"
                              :output-dir "./dist/out"
                              :asset-path "./out"
-                             :main "milia-wrapper"
+                             :main "milia.wrapper"
                              :optimizations :none
                              :pretty-print true
                              :source-map true}}

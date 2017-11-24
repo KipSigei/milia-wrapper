@@ -1,4 +1,4 @@
-(ns milia-wrappper
+(ns milia.wrapper
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [chimera.js-interop :refer [json->js->cljs str->json]]
             [cljs.core.async :refer [<!]]
