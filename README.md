@@ -45,8 +45,8 @@ var callback = function(response) {
                              console.log(response)
                          }
 
- milia.set_host(protocol, host);
- milia.get_form_data(datasetID, queryParams, callback);
+ milia.wrapper.set_host(protocol, host);
+ milia.wrapper.get_form_data(datasetID, queryParams, callback);
 ```
 
 - Usage as node module
@@ -57,7 +57,7 @@ $ npm install milia-wrapper
 
 
 ```javascript
-import * as milia-wrapper from 'milia-wrapper'
+import * as milia from 'milia-wrapper';
 
 var protocol = 'https';
 var host = 'api.ona.io';
@@ -68,6 +68,6 @@ var callback = function(response) {
                              console.log(response)
                          }
 
- milia.set_host(protocol, host);
- milia.get_form_data(datasetID, queryParams, callback);
+ milia.wrapper.set_host(protocol, host);
+ milia.wrapper.get_form_data(datasetID, queryParams, callback);
 ```
