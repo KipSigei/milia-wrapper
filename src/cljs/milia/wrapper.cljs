@@ -1,12 +1,11 @@
-(ns wrappers.milia
+(ns milia.wrapper
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [chimera.js-interop :refer [json->js->cljs str->json]]
             [cljs.core.async :refer [<!]]
             [milia.api.dataset :as dataset-api]
             [milia.api.user :refer [user]]
             [milia.utils.remote :refer [*credentials*]]
-            [milia.utils.remote :refer [set-hosts]]
-            [wrappers.stats]))
+            [milia.utils.remote :refer [set-hosts]]))
 
 (defn set-milia-credentials!
   [username temp-token & [token]]

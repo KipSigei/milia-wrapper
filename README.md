@@ -1,6 +1,7 @@
-# milia-wrapper
 
-Compiles [Milia](https://github.com/onaio/milia#milia) for use in Javascript applications. Milia-wrapper written in [Clojurescript](https://github.com/clojure/clojurescript) to encapsulate functions from [Milia](https://github.com/onaio/milia#milia) and CLJS core libraries for use in Javascript.
+# Milia-wrapper
+
+Javascript wrapper for Ona API client library [Milia](https://github.com/onaio/milia#milia) for use in JS & NodeJS applications.
 
 ## Compiling
 
@@ -21,31 +22,52 @@ Production:
 $ lein cljsbuild once prod
 ```
 
-The output file is `../dist/assets/wrappers.js`
+The output file is `./dist/milia-wrapper.js`
 
 
 ## Usage
 
-1. Add the compiled script to page
+-  Usage in scripts
 
 ```html
-	<script src="./wrappers.js"></script>
+<script src="./milia-wrappers.js"></script>
 ```
 
-2.  Call wrapper functions in JS code
 
 ```javascript
-const protocol = 'https';
-const host = 'api.ona.io';
 
-export default function (_self, datasetID, fieldName, callback) {
-  const queryParams =
-    { fields:
-    `${'["defualtField1",' +
-    '"defualtField2",' +
-    '"defualtField3",' +
-    '"'}${fieldName}"]` };
+var protocol = 'https';
+var host = 'api.ona.io';
+var datasetID = 101;
+var queryParams = { fields: `${'["defualtField1",' +
+                                 '"defualtField2",'+'"'}${fieldName}"]`};
+var callback = function(response) {
+                 console.log(response)
+               }
 
-  wrappers.milia.set_host(protocol, host);
-  wrappers.milia.get_form_data(datasetID, queryParams, callback);
+ milia.wrapper.set_host(protocol, host);
+ milia.wrapper.get_form_data(datasetID, queryParams, callback);
+```
+
+- Usage as node module
+
+```
+$ npm install milia-wrapper
+```
+
+
+```javascript
+import * as milia from 'milia-wrapper';
+
+var protocol = 'https';
+var host = 'api.ona.io';
+var datasetID = 101;
+var queryParams = { fields: `${'["defualtField1",' +
+                                 '"defualtField2",'+'"'}${fieldName}"]`};
+var callback = function(response) {
+                 console.log(response)
+               }
+
+ milia.wrapper.set_host(protocol, host);
+ milia.wrapper.get_form_data(datasetID, queryParams, callback);
 ```
