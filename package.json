@@ -1,6 +1,6 @@
 {
   "name": "milia-wrapper",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "JS wrapper for the Ona API client library written in Clojure",
   "main": "dist/wrappers.js",
   "scripts": {
