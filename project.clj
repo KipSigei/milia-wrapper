@@ -9,8 +9,6 @@
                  [org.clojure/clojurescript "1.9.562"]
                  [org.clojure/core.async "0.2.391"]
                  [alandipert/storage-atom "1.2.4"]
-                 [onaio/hatti "0.3.24"]
-                 [onaio/chimera "0.0.6"]
                  [onaio/milia "0.3.30-wrapper-SNAPSHOT"]
                  [cljsjs/moment "2.17.1-0"]]
 
@@ -18,15 +16,14 @@
             [lein-cljfmt "0.5.6"]]
   :cljsbuild
   {:builds {:dev {:source-paths ["src/cljs"]
-                  :compiler {:output-to "./dist/wrappers.js"
+                  :compiler {:output-to "./dist/milia-wrapper.js"
                              :output-dir "./dist/out"
                              :asset-path "./out"
-                             :main "wrappers.milia"
+                             :main "milia-wrapper"
                              :optimizations :none
                              :pretty-print true
                              :source-map true}}
             :prod {:source-paths ["src/cljs"]
-                   :compiler {:output-to "./dist/wrappers.js"
+                   :compiler {:output-to "./dist/milia-wrapper.js"
                               :optimizations :advanced
-                              :target :nodejs
                               :pretty-print false}}}})

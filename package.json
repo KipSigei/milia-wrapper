@@ -2,7 +2,7 @@
   "name": "milia-wrapper",
   "version": "0.0.1",
   "description": "JS wrapper for the Ona API client library written in Clojure",
-  "main": "dist/wrappers.js",
+  "main": "dist/milia-wrapper.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
