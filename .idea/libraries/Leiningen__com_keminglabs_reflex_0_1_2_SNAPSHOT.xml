@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: com.keminglabs/reflex:0.1.2-SNAPSHOT">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/keminglabs/reflex/0.1.2-SNAPSHOT/reflex-0.1.2-SNAPSHOT.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

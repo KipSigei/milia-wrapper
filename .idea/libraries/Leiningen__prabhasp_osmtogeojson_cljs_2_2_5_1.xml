@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: prabhasp/osmtogeojson-cljs:2.2.5-1">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/prabhasp/osmtogeojson-cljs/2.2.5-1/osmtogeojson-cljs-2.2.5-1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

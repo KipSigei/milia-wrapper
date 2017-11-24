@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: onaio/hatti:0.3.24">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/onaio/hatti/0.3.24/hatti-0.3.24.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

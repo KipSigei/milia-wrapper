@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Leiningen: com.keminglabs/singult:0.1.7-SNAPSHOT">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/keminglabs/singult/0.1.7-SNAPSHOT/singult-0.1.7-SNAPSHOT.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
