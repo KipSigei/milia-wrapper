@@ -9,7 +9,7 @@
                  [org.clojure/clojurescript "1.9.562"]
                  [org.clojure/core.async "0.2.391"]
                  [alandipert/storage-atom "1.2.4"]
-                 [onaio/milia "0.3.30-wrapper-SNAPSHOT"]
+                 [onaio/milia "0.3.34-SNAPSHOT"]
                  [cljsjs/moment "2.17.1-0"]]
 
   :plugins [[lein-cljsbuild "1.1.4"]
