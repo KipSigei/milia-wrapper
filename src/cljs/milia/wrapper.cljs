@@ -7,39 +7,20 @@
             [milia.utils.remote :refer [*credentials*]]
             [milia.utils.remote :refer [set-hosts]]))
 
-(defn set-milia-credentials!
-  [username temp-token & [token]]
-  (set! *credentials* {:username username
-                       :temp-token temp-token
-                       :token token}))
-
 (defn ^:export set-host
-  "Set ONA API host"
-  [request-protocol data-host & [client-host]]
-  (set-hosts
-   data-host
-   :request-protocol request-protocol
-   :client-host client-host))
-
-(defn ^:export set-credentials
-  "Create an account map given a user's credentials."
-  [username password & [callback]]
-  (go
-    (let [{:keys [body status]} (<! (user true))
-          {:keys [username api_token temp_token]} body]
-      (when (and username api_token temp_token)
-        (set-milia-credentials! username temp_token api_token))
-      (callback status))))
+  "Set request protocol and API data host."
+  [request-protocol data-host]
+  (set-hosts data-host nil nil request-protocol))
 
 (defn ^:export get-form-data
-  "Returns data from dataset-id"
-  [dataset-id query-params callback] 
+  "Returns data from form data from data endpoint."
+  [dataset-id query-params auth-token callback]
   (go
     (let [{:keys [status body]}
-          (<! (dataset-api/data
-               dataset-id
+          (<! (dataset-api/data dataset-id
                :raw? true
                :query-params (json->js->cljs query-params)
-               :must-revalidate? true))
+               :must-revalidate? true
+               :auth-token auth-token))
           error (when (not= status 200) (js/console.log body))]
       (callback error (str->json body)))))
