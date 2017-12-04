@@ -1,6 +1,6 @@
 {
   "name": "milia-wrapper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Javascript wrapper for the Ona API client library (Milia)",
   "main": "dist/milia-wrapper.js",
   "scripts": {
