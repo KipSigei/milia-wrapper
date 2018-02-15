@@ -117,25 +117,25 @@
       [period-key (concat aggregated-data rows-not-included)])))
 
 (defn ^:export aggregate-data
-  [data indicator-field aggregate-options]
+  [data indicator-field aggregate-options include-properties]
   (let [{min-val :min
          group-by-field :group-by
          :as aggregate-options} (js->clj aggregate-options
                                          :keywordize-keys true)
         ;; Minimum total value to show for groups
         minTotal (or min-val 0)
+
+        keys-to-select (concat [submission-date-field
+         indicator-field
+         group-by-field
+         missing-districts-field
+         district-field] (js->clj include-properties))
+
         ;; Filter data where survey_intro/consent = 1 (Yes)
         data (filter #(= (get % consent-field) consent-yes-value)
                      (js->clj data))
         ;; Select columns required for aggregation
-        data (map #(select-keys
-                    %
-                    [submission-date-field
-                     indicator-field
-                     group-by-field
-                     missing-districts-field
-                     district-field])
-                  data)
+        data (map #(select-keys % keys-to-select) data)
         ;; Group rows by week number
         grouped-in-weeks (->> data
                               (group-by get-week)
