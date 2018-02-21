@@ -24,17 +24,40 @@
 (def value-count "value-count")
 (def group-total "total")
 (defn period-text
+  "Convert the period [] into a human readable string"
   [period-key]
-  (str "Week " period-key))
+  (str (.format (.month (js/moment) (get period-key 1)) "MMM") " w" (get period-key 2) " " (get period-key 0)))
 
-(defn get-week
-  "Get week number from date field in row object"
+
+(defn get-month-week
+  "Get week of the month from week number"
+  [week month]
+  (let [m (.week (js/moment) week)
+        w (+ (- (.week m) (.week (.startOf (js/moment m) "month"))) 1)]
+  w))
+
+(defn get-year
+  "Get year number from date field in row object"
   [row]
-  (let [date->week #(.week (js/moment (get row submission-date-field) % true))]
+  (let [date->year #(.year (js/moment (get row submission-date-field) % true))]
     (loop [i 0 fmt (get possible-date-formats i)]
-      (let [week (date->week fmt)]
+      (let [year (date->year fmt)]
+        (if-not (js/isNaN year)
+          year
+          (recur (inc i) (get possible-date-formats (inc i))))))))
+
+(defn get-period
+  "Get period from date field in row object, return as []"
+  [row]
+  (let [date->week #(.week (js/moment (get row submission-date-field) % true))
+        date->month #(.month (js/moment (get row submission-date-field) % true))
+        date->year #(.year (js/moment (get row submission-date-field) % true))]
+    (loop [i 0 fmt (get possible-date-formats i)]
+      (let [week (date->week fmt)
+        month  (date->month  fmt)
+        year (date->year fmt)]
         (if-not (js/isNaN week)
-          week
+          [year month (get-month-week week month)]
           (recur (inc i) (get possible-date-formats (inc i))))))))
 
 (defn remove-invalid-week
@@ -78,7 +101,8 @@
        indicator-field percent
        period          (period-text period-key)
        value-count     maching-rows-count
-       group-total     total-rows})))
+       group-total     total-rows
+       "weekYear"      period-key})))
 
 (defn create-aggregate-fn
   [indicator-field aggregate-options]
@@ -138,9 +162,10 @@
                   data)
         ;; Group rows by week number
         grouped-in-weeks (->> data
-                              (group-by get-week)
+                              (group-by get-period)
                               (remove-invalid-week)
                               (sort-by key))
+
         ;; Aggregate first period
         [first-period-key first-group-rows] (first grouped-in-weeks)
         first-period-aggregated (map (aggregate-datum indicator-field
