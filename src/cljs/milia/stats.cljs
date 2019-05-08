@@ -124,9 +124,11 @@
                                          :keywordize-keys true)
         ;; Minimum total value to show for groups
         minTotal (or min-val 0)
+        jsData (js->clj data)
         ;; Filter data where survey_intro/consent = 1 (Yes)
-        data (filter #(= (get % consent-field) consent-yes-value)
-                     (js->clj data))
+        data (cond->> jsData
+                    (not (empty? (filter #(= (contains? % consent-field) true) jsData)))
+                    (filter #(= (get % consent-field) consent-yes-value)))
         ;; Select columns required for aggregation
         data (map #(select-keys
                     %
