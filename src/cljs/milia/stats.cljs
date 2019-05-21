@@ -1,6 +1,7 @@
 (ns milia.stats
   (:require [chimera.seq :refer [in?]]
-            [cljsjs.moment]))
+            [cljsjs.moment]
+            [clojure.string :refer [join]]))
 
 (defn calc-percentage
   "Calculates percentage given number and total"
@@ -69,9 +70,13 @@
                  previous-group)) field)))
           prev-count (get-prev-group-value value-count)
           prev-total (get-prev-group-value group-total)
+          matching-rows-2 (filter #(true? (not (nil? (re-find (re-pattern (join " " filter-values)) (get % (str indicator-field)))))) group-rows)
           matching-rows
           (filter #(in? filter-values (get % indicator-field)) group-rows)
-          maching-rows-count (+ (count matching-rows) (or prev-count 0))
+          maching-rows-count (+ (count matching-rows-2) (or prev-count 0))
+          _ (js/console.log "matching rows" (clj->js matching-rows))
+          _ (js/console.log "group rows" (clj->js group-rows))
+          _ (js/console.log "matching rows 22????" (clj->js matching-rows-2))
           total-rows (+ (count group-rows) (or prev-total 0))
           percent (calc-percentage maching-rows-count total-rows)]
       {group-by-field  group-key
