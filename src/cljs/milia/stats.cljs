@@ -68,15 +68,13 @@
                  #(= (get % group-by-field)
                      group-key)
                  previous-group)) field)))
-          prev-count (get-prev-group-value value-count)
+          prev-count (get-prev-group-value value-count) 
           prev-total (get-prev-group-value group-total)
           matching-rows-2 (filter #(true? (not (nil? (re-find (re-pattern (join " " filter-values)) (get % (str indicator-field)))))) group-rows)
           matching-rows
           (filter #(in? filter-values (get % indicator-field)) group-rows)
-          maching-rows-count (+ (count matching-rows-2) (or prev-count 0))
-          _ (js/console.log "matching rows" (clj->js matching-rows))
-          _ (js/console.log "group rows" (clj->js group-rows))
-          _ (js/console.log "matching rows 22????" (clj->js matching-rows-2))
+          active-matching-rows (if (> (count filter-values) 1) matching-rows matching-rows-2)
+          maching-rows-count (+ (count active-matching-rows) (or prev-count 0))
           total-rows (+ (count group-rows) (or prev-total 0))
           percent (calc-percentage maching-rows-count total-rows)]
       {group-by-field  group-key
@@ -122,7 +120,7 @@
       [period-key (concat aggregated-data rows-not-included)])))
 
 (defn ^:export aggregate-data
-  [data indicator-field aggregate-options]
+  [data indicator-field aggregate-options extra-props]
   (let [{min-val :min
          group-by-field :group-by
          :as aggregate-options} (js->clj aggregate-options
@@ -134,15 +132,14 @@
         data (cond->> jsData
                     (not (empty? (filter #(= (contains? % consent-field) true) jsData)))
                     (filter #(= (get % consent-field) consent-yes-value)))
-        ;; Select columns required for aggregation
-        data (map #(select-keys
-                    %
-                    [submission-date-field
-                     indicator-field
-                     group-by-field
-                     missing-districts-field
-                     district-field])
-                  data)
+        ; ;; Select columns required for aggregation
+        active-keys (vec (cond-> [submission-date-field
+                                  indicator-field
+                                  group-by-field
+                                  missing-districts-field
+                                  district-field] extra-props (concat extra-props)))
+        data (map #(select-keys % active-keys) data)
+
         ;; Group rows by week number
         grouped-in-weeks (->> data
                               (group-by get-week)
